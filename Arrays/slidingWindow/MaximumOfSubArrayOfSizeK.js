@@ -1,4 +1,4 @@
-//Date: 2021-11-28
+//Date: 2021-11-29
 //Question4: Find maximum of all sub-arrays of length K
 
 console.log(maximumOfAllSubArrayOfSizeK([1, 3, -1, -3, 5, 3, 6, 7], 3));
