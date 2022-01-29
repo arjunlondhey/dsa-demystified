@@ -19,4 +19,18 @@ const printSubsequence = (input, output) => {
 
 }
 
-printSubsequence(input, '');
+
+const printSubsequenceApproachTwo = (input, i, output) => {
+  if (output.length === input.length) {
+    console.log(output);
+    return;
+  }
+
+  output.push(input[i]);
+  printSubsequenceApproachTwo(input, i++, output);
+  output.pop();
+  printSubsequenceApproachTwo(input, i++, output);
+}
+
+//printSubsequence(input, '');
+printSubsequenceApproachTwo(input, 0, '');
