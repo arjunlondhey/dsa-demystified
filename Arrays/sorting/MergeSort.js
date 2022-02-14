@@ -25,8 +25,8 @@ function mergeSort (array) {
 
   const half = Math.floor(array.length / 2);
 
+  // splice will truncate the original array by [half, end]
   const left = array.splice(0, half);
-  const right = array;
   return merge(mergeSort(left), mergeSort(array))
 }
 

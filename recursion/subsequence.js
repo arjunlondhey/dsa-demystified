@@ -21,15 +21,15 @@ const printSubsequence = (input, output) => {
 
 
 const printSubsequenceApproachTwo = (input, i, output) => {
-  if (output.length === input.length) {
+  if (i >= input.length) {
     console.log(output);
     return;
   }
 
   output.push(input[i]);
-  printSubsequenceApproachTwo(input, i++, output);
+  printSubsequenceApproachTwo(input, i + 1, output);
   output.pop();
-  printSubsequenceApproachTwo(input, i++, output);
+  printSubsequenceApproachTwo(input, i + 1, output);
 }
 
 //printSubsequence(input, '');

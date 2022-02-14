@@ -19,4 +19,21 @@ const printPermutationWithSpaces = (input, output) => {
 
 }
 
+const printPermutationWithSpacesApproachTwo = (input, i, output) => {
+  if (i === input.length) {
+    console.log(output.join(''));
+    return;
+  }
+
+  //output += input[i] + ' ';
+  output.push(input[i] + ' ');
+  printPermutationWithSpacesApproachTwo(input, i + 1, output);
+  output.pop();
+  output.push(input[i]);
+  printPermutationWithSpacesApproachTwo(input, i + 1, output);
+  output.pop()
+}
+
+printPermutationWithSpacesApproachTwo(input, 0, []);
+
 printPermutationWithSpaces(input.substring(1), input[0]);
