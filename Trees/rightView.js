@@ -1,5 +1,6 @@
 // Date: 08-03-2022
-const _ = require('lodash');
+
+// all traversal of tree
 
 
 class TreeNode {
@@ -39,9 +40,9 @@ function createTree () {
   return root;
 }
 
-function processBottomView () {
+function processRightView () {
   let root = createTree();
-  bottomView(root);
+  rightView(root);
 }
 
 function processLevelOrder () {
@@ -50,32 +51,38 @@ function processLevelOrder () {
 }
 
 /** Uncomment below function to run required traversal */
-processBottomView();
+processRightView();
 
-function bottomView (root) {
+function rightView (root) {
   if (!root) return null;
 
   let queue = [],
-    map = {};
-  queue.push({ root: root, hd: 0 });
+    printValue = true;
+  queue.push(root);
+  queue.push({ data: 'X' });
 
   while (queue.length) {
     let element = queue.shift();
 
-    map[element.hd] = element.root.data;
-
-    if (element.root.left) {
-      queue.push({ root: element.root.left, hd: element.hd - 1 });
+    if (element.data === 'X' && queue.length) {
+      queue.push({ data: 'X' });
+      printValue = true;
+      continue;
     }
 
-    if (element.root.right) {
-      queue.push({ root: element.root.right, hd: element.hd + 1 });
+    if (printValue) {
+      printValue = false;
+      console.log(element.data);
+    }
+
+    if (element.right) {
+      queue.push(element.right);
+    }
+
+    if (element.left) {
+      queue.push(element.left);
     }
   }
-
-  _.forEach(map, (value, key) => {
-    console.log(value);
-  });
 }
 function levelOrder (root) {
   if (!root) {
@@ -99,3 +106,4 @@ function levelOrder (root) {
     }
   }
 }
+

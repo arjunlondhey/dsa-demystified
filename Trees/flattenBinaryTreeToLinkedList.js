@@ -39,44 +39,47 @@ function createTree () {
   return root;
 }
 
-function processBottomView () {
+function flattenTreeHelper () {
   let root = createTree();
-  bottomView(root);
-}
 
-function processLevelOrder () {
-  let root = createTree();
+  flattenTree(root);
+
   levelOrder(root);
 }
 
-/** Uncomment below function to run required traversal */
-processBottomView();
-
-function bottomView (root) {
-  if (!root) return null;
-
-  let queue = [],
-    map = {};
-  queue.push({ root: root, hd: 0 });
-
-  while (queue.length) {
-    let element = queue.shift();
-
-    map[element.hd] = element.root.data;
-
-    if (element.root.left) {
-      queue.push({ root: element.root.left, hd: element.hd - 1 });
-    }
-
-    if (element.root.right) {
-      queue.push({ root: element.root.right, hd: element.hd + 1 });
-    }
+flattenTreeHelper();
+function flattenTree (root) {
+  if (!root) {
+    return null;
   }
 
-  _.forEach(map, (value, key) => {
-    console.log(value);
-  });
+  if (!root.left && !root.right) {
+    return root;
+  }
+
+  //console.log(root);
+  let leftNode = flattenTree(root.left);
+  let rightNode = flattenTree(root.right);
+
+  if (!leftNode) {
+    return root;
+  }
+
+  let temp = rightNode;
+
+  root.right = leftNode;
+
+  root.left = null;
+  while (leftNode.right) {
+    leftNode = leftNode.right;
+  }
+
+  leftNode.right = temp;
+
+  return root;
 }
+
+
 function levelOrder (root) {
   if (!root) {
     return null;

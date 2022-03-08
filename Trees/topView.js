@@ -62,7 +62,8 @@ function bottomView (root) {
   while (queue.length) {
     let element = queue.shift();
 
-    map[element.hd] = element.root.data;
+    if (!map[element.hd])
+      map[element.hd] = element.root.data;
 
     if (element.root.left) {
       queue.push({ root: element.root.left, hd: element.hd - 1 });
@@ -99,3 +100,4 @@ function levelOrder (root) {
     }
   }
 }
+

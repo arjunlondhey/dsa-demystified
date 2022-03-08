@@ -39,9 +39,9 @@ function createTree () {
   return root;
 }
 
-function processBottomView () {
+function processVerticalTraversal () {
   let root = createTree();
-  bottomView(root);
+  verticalTraversal(root);
 }
 
 function processLevelOrder () {
@@ -50,9 +50,9 @@ function processLevelOrder () {
 }
 
 /** Uncomment below function to run required traversal */
-processBottomView();
+processVerticalTraversal();
 
-function bottomView (root) {
+function verticalTraversal (root) {
   if (!root) return null;
 
   let queue = [],
@@ -62,7 +62,11 @@ function bottomView (root) {
   while (queue.length) {
     let element = queue.shift();
 
-    map[element.hd] = element.root.data;
+    if (!map[element.hd]) {
+      map[element.hd] = [element.root.data];
+    } else {
+      map[element.hd].push(element.root.data);
+    }
 
     if (element.root.left) {
       queue.push({ root: element.root.left, hd: element.hd - 1 });

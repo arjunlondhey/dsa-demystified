@@ -22,61 +22,48 @@ function createTree () {
   root.right = new TreeNode(3);
 
   let lt1 = root.left;
-  let rt1 = root.right;
-
+  // lt1 = 2
   lt1.left = new TreeNode(4);
   lt1.right = new TreeNode(5);
-
-  rt1.left = new TreeNode(6);
-  rt1.right = new TreeNode(7);
+  lt1.right.left = new TreeNode(7);
 
   lt2 = lt1.left;
+  // lt2 = 4
+  lt2.left = new TreeNode(6);
+  lt2.left.left = new TreeNode(8);
 
-  lt2.left = new TreeNode(8);
-  lt2.right = new TreeNode(9);
-  lt2.right.right = new TreeNode(10);
 
   return root;
 }
 
-function processBottomView () {
-  let root = createTree();
-  bottomView(root);
-}
 
-function processLevelOrder () {
+let isHeightBalanced = true;
+function findHeightBalanced () {
   let root = createTree();
-  levelOrder(root);
+  heightBalanced(root);
+  //levelOrder(root);
 }
 
 /** Uncomment below function to run required traversal */
-processBottomView();
+findHeightBalanced();
+console.log(isHeightBalanced);
 
-function bottomView (root) {
-  if (!root) return null;
-
-  let queue = [],
-    map = {};
-  queue.push({ root: root, hd: 0 });
-
-  while (queue.length) {
-    let element = queue.shift();
-
-    map[element.hd] = element.root.data;
-
-    if (element.root.left) {
-      queue.push({ root: element.root.left, hd: element.hd - 1 });
-    }
-
-    if (element.root.right) {
-      queue.push({ root: element.root.right, hd: element.hd + 1 });
-    }
+function heightBalanced (root) {
+  if (!root) {
+    return 0;
   }
 
-  _.forEach(map, (value, key) => {
-    console.log(value);
-  });
+
+  let ld = heightBalanced(root.left);
+  let rd = heightBalanced(root.right);
+
+  if (Math.abs(ld - rd) > 1) {
+    isHeightBalanced = false;
+  }
+
+  return 1 + Math.max(ld, rd);
 }
+
 function levelOrder (root) {
   if (!root) {
     return null;
