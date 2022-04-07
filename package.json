@@ -19,6 +19,7 @@
   "homepage": "https://github.com/arjunlondhey/dsa-demystified#readme",
   "dependencies": {
     "collections": "^5.1.12",
+    "heap": "^0.2.7",
     "lodash": "^4.17.21"
   }
 }
